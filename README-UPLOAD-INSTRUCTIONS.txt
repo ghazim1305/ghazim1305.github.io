@@ -1,26 +1,21 @@
-Prime Growth PK - GitHub Pages Upload Package
+Prime Growth PK Multipage GitHub Pages Package
 
-Upload/replace these files in your GitHub repository:
+Upload/replace all files in your GitHub repository.
 
+Files added:
 - index.html
+- about.html
+- services.html
+- portfolio.html
+- contact.html
+- css/styles.css
+- js/scripts.js
+- assets logo/favicon files
 - CNAME
 - robots.txt
 - sitemap.xml
-- css/styles.css
-- js/scripts.js
-- assets/favicon.ico
-- assets/favicon-16x16.png
-- assets/favicon-32x32.png
-- assets/img/logo-full.png
-- assets/img/logo-full.webp
-- assets/img/logo-icon.png
-- assets/img/logo-icon.webp
-- assets/img/hero-bg.jpg
 
 Important:
-1. Do not delete CNAME because it keeps your custom domain connected.
-2. To activate the contact form, replace this in index.html:
-   https://formspree.io/f/YOUR_FORM_ID
-   with your real Formspree form URL.
-3. After upload, commit changes and wait 1 minute.
-4. Open https://primegrowthpk.com and press Ctrl + F5.
+- Keep CNAME file.
+- Your email contact@primegrowthpk.com is already added.
+- To activate the contact form, replace YOUR_FORM_ID in contact.html with your Formspree ID.
