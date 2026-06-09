@@ -1,22 +1,15 @@
-Prime Growth PK V3 Premium Animated Website
+Prime Growth PK V3 Fixed
 
-Upload/replace all files in your GitHub repository and commit.
+This version keeps the good V2 homepage layout and adds safe animations only.
 
-V3 improvements included:
-- Premium hero animations
-- Smooth page transitions
-- Loading screen with logo
-- Scroll reveal animations
-- Animated navbar on scroll
-- Animated buttons and service cards
-- FAQ accordion
-- Floating contact button animation
-- Formspree link already added:
+Includes:
+- Same professional V2 layout
+- Safe scroll animations
+- Animated logo float
+- Button hover effects
+- Navbar scroll effect
+- FAQ section
+- Formspree link already set:
   https://formspree.io/f/xlgknpyo
 
-After upload:
-1. Commit changes.
-2. Wait 1 minute.
-3. Open https://primegrowthpk.com
-4. Press Ctrl + F5.
-5. Test the contact form.
+Upload/replace all files in GitHub, commit, wait 1 minute, then press Ctrl + F5.

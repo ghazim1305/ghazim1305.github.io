@@ -18,48 +18,33 @@ document.querySelectorAll(".counter").forEach(counter => {
 });
 
 
-// V3 Premium interactions
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".site-loader");
-  if (loader) {
-    setTimeout(() => loader.classList.add("hidden"), 350);
-  }
-});
-
-const header = document.querySelector(".site-header");
+// V3 Fixed safe animations
+const headerV3 = document.querySelector(".site-header");
 window.addEventListener("scroll", () => {
-  if (header) header.classList.toggle("scrolled", window.scrollY > 20);
+    if (headerV3) headerV3.classList.toggle("scrolled", window.scrollY > 20);
 });
 
-const revealItems = document.querySelectorAll(".reveal");
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      revealObserver.unobserve(entry.target);
-    }
-  });
+const revealElements = document.querySelectorAll(".section, .service-card, .portfolio-card, .process-card, .testimonial-card, .cta, .contact-wrapper, .about-wrapper");
+revealElements.forEach(el => el.classList.add("reveal"));
+
+const revealObserverV3 = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserverV3.unobserve(entry.target);
+        }
+    });
 }, { threshold: 0.12 });
 
-revealItems.forEach(item => revealObserver.observe(item));
+revealElements.forEach(el => revealObserverV3.observe(el));
 
 document.querySelectorAll(".faq-question").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const item = btn.closest(".faq-item");
-    if (!item) return;
-    document.querySelectorAll(".faq-item").forEach(other => {
-      if (other !== item) other.classList.remove("active");
+    btn.addEventListener("click", () => {
+        const item = btn.closest(".faq-item");
+        if (!item) return;
+        document.querySelectorAll(".faq-item").forEach(other => {
+            if (other !== item) other.classList.remove("active");
+        });
+        item.classList.toggle("active");
     });
-    item.classList.toggle("active");
-  });
-});
-
-document.querySelectorAll("a[href$='.html']").forEach(link => {
-  link.addEventListener("click", (e) => {
-    const url = link.getAttribute("href");
-    if (!url || url.startsWith("http") || url.startsWith("mailto:")) return;
-    e.preventDefault();
-    document.body.style.opacity = "0";
-    setTimeout(() => { window.location.href = url; }, 180);
-  });
 });
