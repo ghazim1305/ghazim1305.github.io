@@ -1,15 +1,15 @@
-Prime Growth PK V3 Fixed
+Prime Growth PK V4 - Corporate + Premium Creative
 
-This version keeps the good V2 homepage layout and adds safe animations only.
+This version keeps the stable V2/V3-fixed layout and adds polished premium creative effects.
 
-Includes:
-- Same professional V2 layout
+Style direction:
+- Corporate/professional base
+- Premium creative hero treatment
 - Safe scroll animations
-- Animated logo float
-- Button hover effects
-- Navbar scroll effect
-- FAQ section
-- Formspree link already set:
+- Subtle floating logo
+- Trust strip
+- Better hover effects
+- Formspree already connected:
   https://formspree.io/f/xlgknpyo
 
 Upload/replace all files in GitHub, commit, wait 1 minute, then press Ctrl + F5.
