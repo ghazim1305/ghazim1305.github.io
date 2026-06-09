@@ -80,3 +80,139 @@ img { max-width: 100%; display: block; }
     .hero-actions { flex-direction:column; }
     .btn { width:100%; }
 }
+
+
+/* Professional upgrade */
+.top-bar {
+    background: #031426;
+    color: rgba(255,255,255,.82);
+    font-size: .88rem;
+    padding: 8px 24px;
+}
+.top-bar-inner {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.top-bar a {
+    color: rgba(255,255,255,.9);
+    text-decoration: none;
+}
+.site-header {
+    position: sticky;
+}
+.navbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.hero {
+    position: relative;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 72% 35%, rgba(98,180,20,.32), transparent 34%),
+        linear-gradient(90deg, rgba(6,27,54,.96), rgba(6,27,54,.74));
+    pointer-events: none;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+.hero-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+.hero-badges span {
+    padding: 9px 13px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .9rem;
+}
+.hero-logo-card {
+    transform: perspective(900px) rotateY(-5deg);
+}
+.service-card {
+    position: relative;
+    overflow: hidden;
+}
+.service-card::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    right: -55px;
+    top: -55px;
+    background: rgba(98,180,20,.1);
+    border-radius: 50%;
+}
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+.process-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+}
+.process-card .step {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    margin-bottom: 16px;
+}
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+.testimonial-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+}
+.testimonial-card p {
+    color: var(--muted);
+}
+.testimonial-card strong {
+    color: var(--navy);
+}
+.contact-note {
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: .92rem;
+}
+.form-not-active {
+    display: none !important;
+}
+@media (max-width: 900px) {
+    .process-grid,
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-logo-card {
+        transform: none;
+    }
+}
