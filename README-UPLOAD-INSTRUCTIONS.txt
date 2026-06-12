@@ -1,26 +1,23 @@
-Prime Growth PK Final Website Files
+Prime Growth PK Final Website Files - Updated Logos
 
 Upload/replace all files in your GitHub repository and commit.
 
-Removed:
-- Portfolio page and menu
-- E-commerce Development
-- Mobile App Development
-- CEO homepage image
-
 Included:
-- Home, About, Services, Contact
-- Privacy Policy, Terms & Conditions
-- 8 service pages
-- robots.txt and sitemap.xml
+- Updated logo-full.png
+- Updated logo-icon.png
+- Updated logo-text.png
+- Updated favicon set
+- Updated og-image.png
+- Full website files
+- robots.txt
+- sitemap.xml
+- CNAME
 - Formspree contact form connected to https://formspree.io/f/xlgknpyo
-- Email: contact@primegrowthpk.com
-- CNAME for primegrowthpk.com
 
 After upload:
 1. Commit changes.
 2. Wait 1 minute.
 3. Open https://primegrowthpk.com
 4. Press Ctrl + F5.
-5. Test contact form.
-6. Then submit sitemap.xml in Google Search Console.
+5. Check favicon and logo.
+6. Submit sitemap.xml in Google Search Console.
