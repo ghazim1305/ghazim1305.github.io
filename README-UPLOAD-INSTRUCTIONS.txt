@@ -24,3 +24,14 @@ After upload:
 
 
 Motto added: Growing Today, Leading Tomorrow
+
+
+Google Analytics Added:
+- Measurement ID: G-C7WZXLXW52
+- Added to all HTML pages before </head>
+
+After upload:
+1. Commit changes in GitHub.
+2. Wait 1-2 minutes.
+3. Open https://primegrowthpk.com and visit a few pages.
+4. Check Google Analytics > Reports > Realtime.
