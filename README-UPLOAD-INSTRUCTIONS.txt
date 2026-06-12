@@ -21,3 +21,6 @@ After upload:
 4. Press Ctrl + F5.
 5. Check favicon and logo.
 6. Submit sitemap.xml in Google Search Console.
+
+
+Motto added: Growing Today, Leading Tomorrow
