@@ -32,8 +32,7 @@
 <a href="about.html" class="">About</a>
 <a href="contact.html" class="active">Contact</a><a href="contact.html" class="nav-cta">Get a Quote</a></div></nav></header>
 <main><section class="page-hero"><div class="container"><p class="eyebrow">Contact Us</p><h1>Get a Free Consultation</h1><p>Send your details and we’ll get back to you soon.</p></div></section><section class="section"><div class="container">
-<div class="contact-wrap"><form class="contact-form" action="https://formspree.io/f/xlgknpyo" method="POST">
-  <input type="hidden" name="_next" value="https://primegrowthpk.com/thank-you.html">
+<div class="contact-wrap"><form class="contact-form" action="https://formspree.io/f/xlgknpyo" method="POST" id="contactForm">
 <input type="hidden" name="_subject" value="New enquiry from Prime Growth PK website">
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="text" name="company" placeholder="Company Name">
@@ -43,4 +42,44 @@
 <textarea name="message" placeholder="Tell us about your requirement" rows="5" required></textarea>
 <button type="submit" class="btn btn-primary">Send Message</button><p class="secure-note">Your message will be sent securely to Prime Growth PK.</p></form>
 <div class="contact-info"><img src="assets/img/logo-icon.png" alt="Prime Growth PK Icon"><h3>Prime Growth PK</h3><p><strong>Email:</strong> contact@primegrowthpk.com</p><p><strong>Website:</strong> primegrowthpk.com</p><p><strong>Services:</strong> Digital Marketing, Web Development, SEO, Google Ads, Branding, ERP, Content Writing and Email Marketing.</p><a href="mailto:contact@primegrowthpk.com" class="btn btn-primary">Email Us Directly</a></div></div>
-</div></section></main><a class="whatsapp" href="mailto:contact@primegrowthpk.com" aria-label="Contact Prime Growth PK">✉</a><footer class="footer"><div class="container"><p>Copyright © 2026 Prime Growth PK. Growing Today, Leading Tomorrow. All Rights Reserved. | <a href="mailto:contact@primegrowthpk.com">contact@primegrowthpk.com</a></p><p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a></p></div></footer><script src="js/scripts.js"></script></body></html>
+</div></section></main><a class="whatsapp" href="mailto:contact@primegrowthpk.com" aria-label="Contact Prime Growth PK">✉</a><footer class="footer"><div class="container"><p>Copyright © 2026 Prime Growth PK. Growing Today, Leading Tomorrow. All Rights Reserved. | <a href="mailto:contact@primegrowthpk.com">contact@primegrowthpk.com</a></p><p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a></p></div></footer><script src="js/scripts.js"></script>
+<script>
+const pgContactForm = document.getElementById("contactForm");
+if (pgContactForm) {
+  pgContactForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const submitButton = pgContactForm.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+    }
+
+    try {
+      const response = await fetch(pgContactForm.action, {
+        method: "POST",
+        body: new FormData(pgContactForm),
+        headers: { "Accept": "application/json" }
+      });
+
+      if (response.ok) {
+        window.location.href = "thank-you.html";
+      } else {
+        alert("Something went wrong. Please email us directly at contact@primegrowthpk.com.");
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "Send Message";
+        }
+      }
+    } catch (error) {
+      alert("Network error. Please email us directly at contact@primegrowthpk.com.");
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Message";
+      }
+    }
+  });
+}
+</script>
+
+</body></html>
