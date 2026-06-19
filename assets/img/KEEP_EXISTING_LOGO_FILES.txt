@@ -1,0 +1,5 @@
+This update intentionally does not replace the existing Prime Growth PK logo files.
+Keep these existing files in the repository:
+- assets/img/logo-full.png
+- assets/img/logo-icon.png (if currently used)
+The new pages reference /assets/img/logo-full.png.
