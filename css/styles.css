@@ -9,3 +9,5 @@
     margin:10px 0 20px !important;
     letter-spacing:1px;
 }
+/* Social icon and watermark compatibility */
+.social-link{display:inline-flex;align-items:center;gap:9px;transition:transform .3s ease,box-shadow .3s ease}.social-link .social-icon{width:1.18em;height:1.18em}.social-link:hover{transform:translateY(-3px)}.brand-watermark{position:fixed;right:-30px;top:50%;width:220px;opacity:.05;pointer-events:none;z-index:4;transform:translateY(-50%);animation:premiumFloat 8s ease-in-out infinite}.brand-watermark img{width:100%}

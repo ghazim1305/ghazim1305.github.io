@@ -1,17 +1,19 @@
 
 :root{
-  --green:#0f5132;
-  --green-2:#176b45;
-  --green-soft:#e9f4ee;
-  --gold:#c8952e;
-  --gold-soft:#fbf3df;
-  --ink:#1f2a25;
-  --muted:#657069;
-  --line:#dfe7e2;
+  --green:#62b414;
+  --green-2:#167a22;
+  --green-soft:#eef8e7;
+  --gold:#62b414;
+  --gold-soft:#f3faec;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --line:#e2e8f0;
   --surface:#ffffff;
-  --surface-2:#f8faf8;
-  --cream:#fbfaf5;
-  --shadow:0 16px 45px rgba(24,56,42,.10);
+  --surface-2:#f8fafc;
+  --cream:#ffffff;
+  --navy:#061b36;
+  --navy-deep:#031426;
+  --shadow:0 20px 60px rgba(15,23,42,.12);
   --radius:22px;
 }
 *{box-sizing:border-box}
@@ -122,3 +124,67 @@ footer a{color:#fff}
   .section{padding:60px 0}
   .topbar .container{justify-content:center}
 }
+
+/* Original Prime Growth PK navy-and-green colour scheme restored.
+   The current layout, spacing and content remain unchanged. */
+body{background:#fff;color:var(--ink);position:relative;isolation:isolate;overflow-x:hidden}
+a{color:var(--green-2)}
+.topbar{background:var(--navy-deep)}
+.nav-wrap{background:rgba(6,27,54,.97);border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.brand,.nav-links a,.menu-btn{color:#fff}
+.nav-links a.active,.nav-links a:hover{color:#9be35a}
+.brand img{filter:drop-shadow(0 8px 14px rgba(98,180,20,.22));transition:transform .35s ease,filter .35s ease}
+.brand:hover img{transform:translateY(-2px) scale(1.025);filter:drop-shadow(0 12px 18px rgba(98,180,20,.36))}
+.btn-primary{background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff;box-shadow:0 10px 24px rgba(98,180,20,.24)}
+.btn-primary:hover{background:linear-gradient(135deg,#74c52a,var(--green-2));box-shadow:0 14px 30px rgba(98,180,20,.34)}
+.btn-outline{border-color:var(--green-2);color:var(--green-2)}
+.btn-outline:hover{background:var(--green-soft)}
+.btn-gold{background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff}
+.hero{background:radial-gradient(circle at 85% 15%,rgba(98,180,20,.17),transparent 32%),radial-gradient(circle at 10% 20%,rgba(6,27,54,.10),transparent 30%),linear-gradient(180deg,#fff,var(--surface-2))}
+.eyebrow,.stat strong,.checklist li:before{color:var(--green-2)}
+.card,.hero-card,.article,.stat{box-shadow:var(--shadow)}
+.card{border-color:var(--line)}
+.page-hero{background:linear-gradient(135deg,var(--navy),#0d3d2f);color:#fff}
+.page-hero h1,.page-hero h2,.page-hero h3{color:#fff}
+.page-hero .lead,.page-hero .breadcrumb{color:rgba(255,255,255,.84)}
+.page-hero .eyebrow,.page-hero .breadcrumb a{color:#9be35a}
+.cta{background:linear-gradient(135deg,var(--navy),var(--green-2));color:#fff;box-shadow:0 18px 48px rgba(6,27,54,.18)}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(98,180,20,.24);border-color:var(--green)}
+.pill{background:var(--green-soft);color:var(--green-2)}
+.notice{background:var(--green-soft);border-color:#cfe7bb}
+footer{background:var(--navy);color:rgba(255,255,255,.80)}
+.footer-bottom{color:rgba(255,255,255,.68)}
+
+/* Animated social icons on every Instagram and Facebook link. */
+.social-link{--social-accent:var(--green);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;overflow:hidden;isolation:isolate;transition:transform .3s ease,box-shadow .3s ease,color .3s ease,background .3s ease,border-color .3s ease;text-decoration:none!important}
+.social-link .social-icon{width:1.18em;height:1.18em;flex:0 0 auto;transition:transform .36s cubic-bezier(.2,.8,.2,1),filter .36s ease;filter:drop-shadow(0 3px 5px rgba(0,0,0,.10))}
+.social-link:after{content:"";position:absolute;z-index:-1;inset:-45% auto -45% -35%;width:28%;background:rgba(255,255,255,.32);transform:skewX(-22deg) translateX(-260%);transition:transform .65s ease}
+.social-link:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(15,23,42,.18)}
+.social-link:hover:after{transform:skewX(-22deg) translateX(560%)}
+.social-link:hover .social-icon{transform:scale(1.18) rotate(-7deg);filter:drop-shadow(0 5px 8px rgba(0,0,0,.18))}
+.social-row .social-link:not(.btn){padding:9px 13px;border:1px solid rgba(6,27,54,.16);border-radius:999px;background:rgba(255,255,255,.72)}
+.social-instagram:hover{background:linear-gradient(135deg,#f58529 0%,#dd2a7b 48%,#8134af 100%)!important;border-color:transparent!important;color:#fff!important}
+.social-facebook:hover{background:#1877f2!important;border-color:#1877f2!important;color:#fff!important}
+footer .social-row .social-link:not(.btn){color:#fff;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
+footer .social-row .social-link:not(.btn):hover{border-color:transparent}
+
+/* Subtle animated logo watermark. */
+.brand-watermark{position:fixed;right:-30px;top:50%;z-index:4;width:clamp(145px,16vw,230px);opacity:.05;pointer-events:none;user-select:none;transform:translateY(-50%);filter:saturate(.88) drop-shadow(0 18px 38px rgba(6,27,54,.12));animation:brandWatermarkFloat 8s ease-in-out infinite;transition:opacity .45s ease,filter .45s ease}
+.brand-watermark img{display:block;width:100%;height:auto}
+@keyframes brandWatermarkFloat{0%,100%{transform:translateY(-50%) translateX(0) rotate(-1deg);opacity:.042}50%{transform:translateY(calc(-50% - 10px)) translateX(-7px) rotate(1deg);opacity:.068}}
+main,footer,.topbar{position:relative;z-index:5}
+.nav-wrap{z-index:50}
+.whatsapp-float{z-index:60}
+
+@media(max-width:900px){
+  .nav-links{background:var(--navy);border-color:rgba(255,255,255,.12)}
+  .nav-links a{color:#fff}
+  .brand-watermark{width:145px;right:-42px;opacity:.038}
+}
+@media(max-width:620px){
+  .brand-watermark{width:118px;right:-38px;opacity:.032}
+}
+@media(prefers-reduced-motion:reduce){
+  .brand-watermark,.social-link,.social-link .social-icon,.social-link:after,.brand img{animation:none!important;transition:none!important}
+}
+
