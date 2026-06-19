@@ -188,3 +188,134 @@ main,footer,.topbar{position:relative;z-index:5}
   .brand-watermark,.social-link,.social-link .social-icon,.social-link:after,.brand img{animation:none!important;transition:none!important}
 }
 
+/* === Prime Growth PK Premium Interaction Layer v2 === */
+:root{
+  --brand-green:#62b414;
+  --brand-green-dark:#167a22;
+  --brand-navy:#061b36;
+  --brand-navy-deep:#031426;
+  --premium-shadow:0 18px 45px rgba(6,27,54,.13);
+  --premium-shadow-hover:0 24px 60px rgba(6,27,54,.19);
+}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ui-icon{width:1.15em;height:1.15em;flex:0 0 auto;display:inline-block;vertical-align:-.18em;transition:transform .34s cubic-bezier(.2,.8,.2,1),filter .34s ease}
+.icon-link{display:inline-flex;align-items:center;gap:8px;max-width:100%;transition:color .25s ease,transform .25s ease;text-decoration:none!important}
+.icon-link:hover{transform:translateX(2px)}
+.icon-link .ui-icon{width:1.02em;height:1.02em}
+.topbar .icon-link{gap:6px;color:#fff}
+.topbar .icon-link:hover{color:#b9f07f}
+
+/* Premium buttons: restrained movement, clear icons and strong focus states. */
+.btn{position:relative;isolation:isolate;overflow:hidden;min-height:48px;padding:13px 21px;border-radius:14px;box-shadow:0 9px 22px rgba(6,27,54,.10);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,background .28s ease,border-color .28s ease,color .28s ease}
+.btn::before{content:"";position:absolute;z-index:-1;top:-45%;bottom:-45%;left:-35%;width:24%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);transform:skewX(-20deg) translateX(-220%);transition:transform .72s ease}
+.btn:hover{transform:translateY(-3px);box-shadow:0 15px 34px rgba(6,27,54,.18)}
+.btn:hover::before{transform:skewX(-20deg) translateX(640%)}
+.btn:hover .ui-icon{transform:translateX(2px) scale(1.08)}
+.btn:active{transform:translateY(-1px) scale(.99)}
+.btn:focus-visible,.more:focus-visible,.social-link:focus-visible,.icon-link:focus-visible,.whatsapp-float:focus-visible{outline:3px solid rgba(98,180,20,.38);outline-offset:3px}
+.btn-primary{border-color:rgba(255,255,255,.12);background:linear-gradient(135deg,#72c826 0%,var(--brand-green-dark) 100%)}
+.btn-primary:hover{background:linear-gradient(135deg,#82d335 0%,#11691c 100%)}
+.btn-outline{background:rgba(255,255,255,.74);border-color:rgba(22,122,34,.45);box-shadow:0 8px 20px rgba(6,27,54,.07);backdrop-filter:blur(8px)}
+.btn-outline:hover{color:#fff;background:linear-gradient(135deg,var(--brand-navy),#0d3d2f);border-color:transparent}
+.btn-gold{background:linear-gradient(135deg,#76ca2e,var(--brand-green-dark));border-color:rgba(255,255,255,.14)}
+.btn-whatsapp{background:linear-gradient(135deg,#2ee66d,#128c3e)!important;color:#fff!important;border-color:rgba(255,255,255,.18)!important;box-shadow:0 12px 28px rgba(18,140,62,.25)!important}
+.btn-whatsapp:hover{background:linear-gradient(135deg,#38ef79,#0d7534)!important;box-shadow:0 17px 36px rgba(18,140,62,.34)!important}
+.btn-on-dark{background:rgba(255,255,255,.09)!important;color:#fff!important;border-color:rgba(255,255,255,.55)!important;backdrop-filter:blur(10px)}
+.btn-on-dark:hover{background:#fff!important;color:var(--brand-navy)!important;border-color:#fff!important}
+.btn.is-loading{pointer-events:none;opacity:.78}
+.btn.is-loading .ui-icon{animation:iconSpin 1s linear infinite}
+@keyframes iconSpin{to{transform:rotate(360deg)}}
+
+/* Polished navigation and menu interaction. */
+.menu-btn{width:46px;height:46px;border-radius:13px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);transition:background .25s ease,transform .25s ease,border-color .25s ease}
+.menu-btn:hover{background:rgba(255,255,255,.13);transform:translateY(-2px);border-color:rgba(155,227,90,.45)}
+.menu-lines{width:22px;height:16px;display:flex;flex-direction:column;justify-content:space-between}
+.menu-lines>span{display:block;height:2px;border-radius:999px;background:currentColor;transition:transform .3s ease,opacity .3s ease,width .3s ease;transform-origin:center}
+.menu-btn.is-open .menu-lines>span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn.is-open .menu-lines>span:nth-child(2){opacity:0;width:0}
+.menu-btn.is-open .menu-lines>span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Cards and sections now feel layered without changing the brand palette. */
+.hero-card,.card,.article,.stat{position:relative;overflow:hidden;border-color:rgba(6,27,54,.10);box-shadow:var(--premium-shadow);transition:transform .34s cubic-bezier(.2,.8,.2,1),box-shadow .34s ease,border-color .34s ease}
+.card::before,.hero-card::before,.stat::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,transparent,var(--brand-green),transparent);opacity:0;transform:scaleX(.45);transition:opacity .34s ease,transform .34s ease}
+.card:hover,.hero-card:hover,.stat:hover{transform:translateY(-6px);box-shadow:var(--premium-shadow-hover);border-color:rgba(98,180,20,.28)}
+.card:hover::before,.hero-card:hover::before,.stat:hover::before{opacity:1;transform:scaleX(1)}
+.hero-card::after{content:"";position:absolute;width:160px;height:160px;right:-85px;top:-85px;border-radius:50%;background:radial-gradient(circle,rgba(98,180,20,.16),transparent 70%);pointer-events:none}
+.section-head h2{position:relative;padding-bottom:14px}
+.section-head h2::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--brand-green),var(--brand-green-dark));box-shadow:0 5px 14px rgba(98,180,20,.24)}
+
+/* Professional service icon system replacing emoji styling. */
+.service-card .icon{width:58px;height:58px;display:grid;place-items:center;margin-bottom:18px;border-radius:17px;color:var(--brand-green-dark);background:linear-gradient(145deg,#f4fbe9,#e6f5da);border:1px solid rgba(98,180,20,.22);box-shadow:0 12px 26px rgba(98,180,20,.13);transition:transform .34s cubic-bezier(.2,.8,.2,1),background .34s ease,color .34s ease,box-shadow .34s ease}
+.service-icon-svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.service-card:hover .icon{transform:translateY(-3px) rotate(-3deg) scale(1.05);color:#fff;background:linear-gradient(135deg,var(--brand-green),var(--brand-green-dark));box-shadow:0 16px 30px rgba(22,122,34,.25)}
+.more{display:inline-flex;align-items:center;gap:8px;width:max-content;margin-top:auto;padding:8px 0;color:var(--brand-green-dark);font-weight:800;position:relative;text-decoration:none!important}
+.more::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:2px;background:var(--brand-green);transition:right .28s ease}
+.more:hover::after{right:0}
+.more:hover .arrow-icon{transform:translateX(5px)}
+.more .ui-icon{width:1.05em;height:1.05em}
+
+/* Refined statistics: the first figure now truthfully reflects eight core services. */
+.stat{padding:24px 18px;background:linear-gradient(155deg,#fff,#f8fbf6)}
+.stat-icon{width:44px;height:44px;margin:0 auto 12px;display:grid;place-items:center;border-radius:14px;color:var(--brand-green-dark);background:var(--green-soft);border:1px solid rgba(98,180,20,.20);transition:transform .32s ease,background .32s ease,color .32s ease}
+.stat-icon .ui-icon{width:23px;height:23px}
+.stat:hover .stat-icon{transform:scale(1.08) rotate(-4deg);background:linear-gradient(135deg,var(--brand-green),var(--brand-green-dark));color:#fff}
+.stat strong{font-size:1.9rem;line-height:1.1;margin-bottom:7px}
+.stat-label{display:block;color:#273348;font-weight:620}
+
+/* Social links: Instagram, Facebook and WhatsApp now share one complete system. */
+.social-whatsapp:hover{background:linear-gradient(135deg,#2ee66d,#128c3e)!important;border-color:transparent!important;color:#fff!important}
+.social-whatsapp .whatsapp-icon{width:1.22em;height:1.22em}
+.social-link .social-label{line-height:1}
+footer .social-row{gap:10px}
+footer .social-row .social-link{min-height:42px;padding:10px 14px}
+
+/* Premium WhatsApp floating action with an animated tooltip. */
+.whatsapp-float{width:62px;height:62px;border:1px solid rgba(255,255,255,.55);background:linear-gradient(145deg,#32e875,#128c3e);box-shadow:0 15px 34px rgba(18,140,62,.34),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.whatsapp-float::before{content:"";position:absolute;inset:-7px;border:2px solid rgba(37,211,102,.28);border-radius:50%;animation:whatsappPulse 2.6s ease-out infinite;pointer-events:none}
+.whatsapp-float .ui-icon{width:31px;height:31px}
+.whatsapp-float:hover{transform:translateY(-5px) scale(1.045);box-shadow:0 20px 42px rgba(18,140,62,.43),inset 0 1px 0 rgba(255,255,255,.4)}
+.whatsapp-float:hover .ui-icon{transform:scale(1.1) rotate(-5deg)}
+.float-label{position:absolute;right:74px;top:50%;transform:translate(10px,-50%);padding:8px 12px;border-radius:10px;background:var(--brand-navy);color:#fff;font-size:.83rem;font-weight:750;white-space:nowrap;opacity:0;pointer-events:none;box-shadow:0 10px 26px rgba(6,27,54,.24);transition:opacity .25s ease,transform .25s ease}
+.float-label::after{content:"";position:absolute;left:100%;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left-color:var(--brand-navy)}
+.whatsapp-float:hover .float-label{opacity:1;transform:translate(0,-50%)}
+@keyframes whatsappPulse{0%{transform:scale(.92);opacity:.8}75%,100%{transform:scale(1.22);opacity:0}}
+
+/* CTA and action cards get more depth while retaining navy and green. */
+.cta{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.13)}
+.cta::before{content:"";position:absolute;width:310px;height:310px;right:-120px;top:-170px;border-radius:50%;background:radial-gradient(circle,rgba(155,227,90,.24),transparent 70%);pointer-events:none}
+.cta::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.cta>*{position:relative;z-index:1}
+.action-card{background:linear-gradient(155deg,#fff,#f5faef)}
+.action-card h3{display:flex;align-items:center;gap:10px}
+.faq details{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+.faq details:hover{transform:translateY(-2px);border-color:rgba(98,180,20,.30);box-shadow:0 12px 30px rgba(6,27,54,.08)}
+.faq summary{transition:color .25s ease}
+.faq details[open] summary{color:var(--brand-green-dark)}
+
+/* Subtle scroll entrance effects; disabled for users who prefer reduced motion. */
+.motion-ready .reveal-item{opacity:0;transform:translateY(18px)}
+.motion-ready .reveal-item.is-visible{opacity:1;transform:translateY(0);transition:opacity .62s ease,transform .62s cubic-bezier(.2,.8,.2,1)}
+
+@media(max-width:900px){
+  .menu-btn{display:flex}
+  .nav-links{box-shadow:0 24px 60px rgba(0,0,0,.28)}
+  .nav-links .btn{width:100%}
+}
+@media(max-width:620px){
+  .btn{width:100%}
+  .hero-actions{display:grid;grid-template-columns:1fr}
+  .whatsapp-float{right:15px;bottom:15px;width:57px;height:57px}
+  .float-label{display:none}
+  .topbar .container>span:last-child{display:flex;flex-direction:column;align-items:center;gap:4px}
+}
+@media(prefers-reduced-motion:reduce){
+  .btn,.btn::before,.ui-icon,.card,.hero-card,.stat,.service-card .icon,.more::after,.whatsapp-float,.whatsapp-float::before,.float-label,.reveal-item{animation:none!important;transition:none!important}
+  .motion-ready .reveal-item{opacity:1!important;transform:none!important}
+}
+
+/* Mobile polish: keep the floating action away from the opening CTA and hide the raw separator. */
+.whatsapp-float.float-hidden{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(18px) scale(.86)}
+@media(max-width:620px){
+  .topbar .container>span:last-child{font-size:0}
+  .topbar .container>span:last-child .icon-link{font-size:.9rem}
+}
