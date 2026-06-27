@@ -254,7 +254,7 @@ main,footer,.topbar{position:relative;z-index:5}
 .more:hover .arrow-icon{transform:translateX(5px)}
 .more .ui-icon{width:1.05em;height:1.05em}
 
-/* Refined statistics: the first figure now truthfully reflects eight core services. */
+/* Refined statistics: the first figure now truthfully reflects ten core services. */
 .stat{padding:24px 18px;background:linear-gradient(155deg,#fff,#f8fbf6)}
 .stat-icon{width:44px;height:44px;margin:0 auto 12px;display:grid;place-items:center;border-radius:14px;color:var(--brand-green-dark);background:var(--green-soft);border:1px solid rgba(98,180,20,.20);transition:transform .32s ease,background .32s ease,color .32s ease}
 .stat-icon .ui-icon{width:23px;height:23px}

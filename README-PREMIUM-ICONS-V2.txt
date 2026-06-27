@@ -1,7 +1,7 @@
 Prime Growth PK — Premium Icons & Interaction Update
 
 Completed:
-- Changed the visible homepage counter from 0+ to 8+ to match the eight core services.
+- Changed the visible homepage counter from 0+ to 10+ to match the ten core services.
 - Added the official-style WhatsApp icon to every WhatsApp link and floating button.
 - Added matching icons to quote, consultation, contact, conversation, email, phone, home, service and enquiry actions.
 - Replaced homepage service emojis with clean inline SVG icons.
