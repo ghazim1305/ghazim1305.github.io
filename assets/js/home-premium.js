@@ -1,14 +1,14 @@
 const homeFixStyle=document.createElement('style');
 homeFixStyle.textContent=`
 .promo{display:none!important}
-.nav-shell{background:rgba(255,255,255,.98)!important;border-bottom:1px solid rgba(5,26,51,.10)!important;box-shadow:0 8px 28px rgba(5,26,51,.10)!important}
-.brand-name{color:var(--navy)!important}.brand-name small{color:var(--green-2)!important}.links{color:var(--navy)!important}
-.menu-btn{color:var(--navy)!important;background:#f5f9f2!important;border-color:rgba(5,26,51,.16)!important}
+.nav-shell{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,250,239,.98))!important;border-bottom:1px solid rgba(10,47,89,.10)!important;box-shadow:0 10px 28px rgba(10,47,89,.08)!important}
+.brand-name{color:#0a2f59!important}.brand-name small{color:#2f7f2b!important}.links{color:#0a2f59!important}
+.menu-btn{color:#0a2f59!important;background:#f3f8ec!important;border-color:rgba(10,47,89,.12)!important}
 .reveal,.reveal.show{opacity:1!important;transform:none!important;transition:none!important}
 .whatsapp-brand-icon{display:inline-block;width:1.18em;height:1.18em;object-fit:contain;flex:0 0 auto;vertical-align:-.18em;margin-right:.28em}
-.whatsapp{background:transparent!important;border:0!important;padding:0!important;animation:none!important;box-shadow:0 13px 30px rgba(18,140,62,.30)!important}
-.whatsapp .whatsapp-brand-icon{width:100%;height:100%;margin:0;filter:drop-shadow(0 8px 16px rgba(18,140,62,.28))}
-@media(max-width:760px){.links{background:#fff!important;border-color:rgba(5,26,51,.12)!important;box-shadow:0 24px 60px rgba(5,26,51,.18)!important}.links a{color:var(--navy)!important}}
+.whatsapp{background:transparent!important;border:0!important;padding:0!important;animation:none!important;box-shadow:none!important}
+.whatsapp .whatsapp-brand-icon{width:100%;height:100%;margin:0;filter:none!important}
+@media(max-width:760px){.links{background:#fff!important;border-color:rgba(10,47,89,.12)!important;box-shadow:0 18px 40px rgba(10,47,89,.12)!important}.links a{color:#0a2f59!important}}
 @media(max-width:480px){section{padding:56px 0}footer{margin-top:56px}}
 `;
 document.head.appendChild(homeFixStyle);
