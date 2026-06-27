@@ -8,7 +8,17 @@ homeFixStyle.textContent=`
 .whatsapp-brand-icon{display:inline-block;width:1.18em;height:1.18em;object-fit:contain;flex:0 0 auto;vertical-align:-.18em;margin-right:.28em}
 .whatsapp{background:transparent!important;border:0!important;padding:0!important;animation:none!important;box-shadow:none!important}
 .whatsapp .whatsapp-brand-icon{width:100%;height:100%;margin:0;filter:none!important}
-@media(max-width:760px){.links{background:#fff!important;border-color:rgba(10,47,89,.12)!important;box-shadow:0 18px 40px rgba(10,47,89,.12)!important}.links a{color:#0a2f59!important}}
+@media(max-width:760px){
+  .links{background:#fff!important;border-color:rgba(10,47,89,.12)!important;box-shadow:0 18px 40px rgba(10,47,89,.12)!important}
+  .links a{color:#0a2f59!important}
+  .hero-grid{display:block!important;min-height:auto!important;padding:34px 0 50px!important}
+  .hero-grid>div:first-child{width:100%!important}
+  .visual{display:none!important;perspective:none!important;transform:none!important}
+  .trust-strip{margin-top:0!important;padding-top:0!important}
+  .hero{min-height:0!important;overflow:hidden!important}
+  .actions{margin-top:24px!important}
+  .micro{margin-top:24px!important}
+}
 @media(max-width:480px){section{padding:56px 0}footer{margin-top:56px}}
 `;
 document.head.appendChild(homeFixStyle);
