@@ -57,3 +57,23 @@ if(whatsappFloat){
   window.addEventListener('scroll', updateWhatsappFloat, {passive:true});
   window.addEventListener('resize', updateWhatsappFloat);
 }
+
+// Apply the official WhatsApp brand mark consistently across every page.
+function applyOfficialWhatsappLogo(){
+  document.querySelectorAll('a[href*="wa.me"]').forEach(link=>{
+    link.querySelectorAll('svg').forEach(svg=>svg.remove());
+    Array.from(link.childNodes).forEach(node=>{
+      if(node.nodeType===Node.TEXT_NODE && /^[\s◉☎📞]+$/u.test(node.textContent||'')) node.remove();
+    });
+    if(!link.querySelector('.whatsapp-brand-icon')){
+      const icon=document.createElement('img');
+      icon.src='/assets/img/whatsapp-logo.svg';
+      icon.alt='';
+      icon.setAttribute('aria-hidden','true');
+      icon.className='whatsapp-brand-icon';
+      const tooltip=link.querySelector('.float-label');
+      link.insertBefore(icon,tooltip||link.firstChild);
+    }
+  });
+}
+applyOfficialWhatsappLogo();
