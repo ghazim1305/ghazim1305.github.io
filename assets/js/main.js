@@ -10,8 +10,18 @@ siteFixStyle.textContent=`
 .whatsapp-float{background:transparent!important;border:0!important;padding:0!important;animation:none!important;box-shadow:none!important}
 .whatsapp-float::before{display:none!important}
 .whatsapp-float .whatsapp-brand-icon{width:100%;height:100%;margin:0;filter:none!important}
-@media(max-width:900px){.nav-links{background:#fff!important;border-color:rgba(10,47,89,.12)!important}.nav-links a{color:#0a2f59!important}}
-@media(max-width:620px){.section{padding:48px 0}.page-hero{padding:54px 0 42px}footer{margin-top:46px;padding-top:46px}}
+.hero{padding:58px 0 54px!important}
+.hero-grid{gap:36px!important}
+.page-hero{padding:48px 0 40px!important}
+.section{padding:62px 0!important}
+.section-head{margin-bottom:26px!important}
+.article h2{margin-top:30px!important}
+.article h3{margin-top:22px!important}
+.hero-card,.card,.article{padding:clamp(22px,3vw,34px)!important}
+footer{margin-top:42px!important;padding-top:46px!important}
+.cta{padding:34px!important}
+@media(max-width:900px){.nav-links{background:#fff!important;border-color:rgba(10,47,89,.12)!important}.nav-links a{color:#0a2f59!important}.hero-grid,.content-layout,.contact-grid,.footer-grid{gap:24px!important}}
+@media(max-width:620px){.hero{padding:42px 0 38px!important}.page-hero{padding:38px 0 32px!important}.section{padding:48px 0!important}.section-head{margin-bottom:22px!important}footer{margin-top:32px!important;padding-top:40px!important}.cta{padding:26px!important}}
 `;
 document.head.appendChild(siteFixStyle);
 document.querySelectorAll('.topbar').forEach(el=>el.remove());
