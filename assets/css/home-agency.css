@@ -1,4 +1,20 @@
-@import url('./home-agency-base.css');
-@import url('./home-agency-sections.css');
-@import url('./home-agency-responsive.css');
-@import url('./home-agency-spacing.css');
+@import url('./home-agency-base.css?v=4');
+@import url('./home-agency-sections.css?v=4');
+@import url('./home-agency-responsive.css?v=4');
+@import url('./home-agency-spacing.css?v=4');
+
+main > section.ticker,
+.hero-section + section.ticker,
+.ticker {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.ticker .ticker-track {
+  min-height: 0 !important;
+  line-height: 1.2 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
