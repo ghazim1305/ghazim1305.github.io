@@ -1,20 +1,55 @@
-@import url('./home-agency-base.css?v=4');
-@import url('./home-agency-sections.css?v=4');
-@import url('./home-agency-responsive.css?v=4');
-@import url('./home-agency-spacing.css?v=4');
+@import url('./home-agency-base.css?v=5');
+@import url('./home-agency-sections.css?v=5');
+@import url('./home-agency-responsive.css?v=5');
+@import url('./home-agency-spacing.css?v=5');
 
 main > section.ticker,
 .hero-section + section.ticker,
 .ticker {
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
   min-height: 0 !important;
   height: auto !important;
+  overflow: hidden !important;
+  position: relative !important;
 }
 
 .ticker .ticker-track {
+  display: flex !important;
+  width: max-content !important;
+  min-width: 100% !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;
+  padding: 0 !important;
   min-height: 0 !important;
   line-height: 1.2 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  white-space: nowrap !important;
+  will-change: transform !important;
+  animation: pgpkTickerMove 24s linear infinite !important;
+}
+
+.ticker .ticker-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px !important;
+  flex-shrink: 0 !important;
+  padding-right: 18px !important;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused !important;
+}
+
+@keyframes pgpkTickerMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 820px) {
+  .ticker .ticker-track { animation-duration: 18s !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker .ticker-track { animation: none !important; transform: none !important; }
 }
