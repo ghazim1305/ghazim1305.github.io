@@ -1,7 +1,35 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
+<script>
+(function () {
+  var redirects = {
+    "/services.html": "/services/",
+    "/about.html": "/about/",
+    "/contact.html": "/contact/",
+    "/web-development.html": "/web-development/",
+    "/seo.html": "/seo/",
+    "/google-ads.html": "/google-ads/",
+    "/social-media-marketing.html": "/social-media-marketing/",
+    "/branding.html": "/branding/",
+    "/content-writing.html": "/content-writing/",
+    "/email-marketing.html": "/email-marketing/",
+    "/privacy-policy.html": "/privacy-policy/",
+    "/terms.html": "/terms/",
+    "/thankyou.html": "/thank-you/",
+    "/thank-you.html": "/thank-you/",
+    "/ai-automation.html": "/ai-automation/",
+    "/mobile-app-development.html": "/mobile-app-development/",
+    "/custom-software.html": "/custom-software/",
+    "/website-maintenance.html": "/website-maintenance/",
+    "/erp-solutions.html": "/custom-software/"
+  };
+  var target = redirects[window.location.pathname];
+  if (target) {
+    window.location.replace(target + window.location.search + window.location.hash);
+  }
+}());
+</script>
 <!-- Google Analytics 4 -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-C7WZXLXW52"></script>
 <script>
@@ -33,7 +61,6 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://primegrowthpk.com/#organization", "name": "Prime Growth PK", "url": "https://primegrowthpk.com/", "logo": "https://primegrowthpk.com/assets/img/logo-full.png", "email": "contact@primegrowthpk.com", "telephone": "+923414162514", "description": "Prime Growth PK provides website development, AI automation, mobile app development, SEO, digital marketing and custom business software for organisations in Pakistan, the United Kingdom and international markets.", "areaServed": [{"@type": "Country", "name": "Pakistan"}, {"@type": "Country", "name": "United Kingdom"}], "sameAs": ["https://www.instagram.com/primegrowthpk/", "https://www.facebook.com/profile.php?id=61590686324341"], "contactPoint": [{"@type": "ContactPoint", "contactType": "sales", "telephone": "+923414162514", "email": "contact@primegrowthpk.com", "availableLanguage": ["English", "Urdu"]}]}</script>
 </head>
 <body>
-
 <div class="nav-wrap"><div class="container nav">
 <a aria-label="Prime Growth PK home" class="brand" href="/">
 <img alt="Prime Growth PK logo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'" src="/assets/img/logo-full.png"/>
