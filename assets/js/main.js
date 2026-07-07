@@ -20,6 +20,9 @@ siteFixStyle.textContent=`
 .hero-card,.card,.article{padding:clamp(22px,3vw,34px)!important}
 footer{margin-top:42px!important;padding-top:46px!important}
 .cta{padding:34px!important}
+.social-row .social-link{width:52px!important;height:52px!important;padding:0!important;border-radius:16px!important;gap:0!important;font-size:0!important}
+.social-row .social-link .social-label{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}
+.social-row .social-icon,.social-row .ui-icon,.social-row .whatsapp-brand-icon{width:21px!important;height:21px!important;margin:0!important;display:block!important;object-fit:contain!important}
 @media(max-width:900px){.nav-links{background:#fff!important;border-color:rgba(10,47,89,.12)!important}.nav-links a{color:#0a2f59!important}.hero-grid,.content-layout,.contact-grid,.footer-grid{gap:24px!important}}
 @media(max-width:620px){.hero{padding:42px 0 38px!important}.page-hero{padding:38px 0 32px!important}.section{padding:48px 0!important}.section-head{margin-bottom:22px!important}footer{margin-top:32px!important;padding-top:40px!important}.cta{padding:26px!important}}
 `;
@@ -88,7 +91,7 @@ if(whatsappFloat){
 
 function applyOfficialWhatsappLogo(){
   document.querySelectorAll('a[href*="wa.me"]').forEach(link=>{
-    const footerTextLink = link.classList.contains('footer-whatsapp-text') || (link.closest('footer') && !link.closest('.socials') && !link.classList.contains('social-whatsapp'));
+    const footerTextLink = link.classList.contains('footer-whatsapp-text') || (link.closest('footer') && !link.closest('.social-row') && !link.classList.contains('social-whatsapp'));
     if(footerTextLink){
       link.querySelectorAll('svg, .whatsapp-brand-icon').forEach(icon=>icon.remove());
       return;
