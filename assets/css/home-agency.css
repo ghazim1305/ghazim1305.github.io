@@ -1,7 +1,7 @@
-@import url('./home-agency-base.css?v=5');
-@import url('./home-agency-sections.css?v=5');
-@import url('./home-agency-responsive.css?v=5');
-@import url('./home-agency-spacing.css?v=5');
+@import url('./home-agency-base.css?v=6');
+@import url('./home-agency-sections.css?v=6');
+@import url('./home-agency-responsive.css?v=6');
+@import url('./home-agency-spacing.css?v=6');
 
 main > section.ticker,
 .hero-section + section.ticker,
@@ -44,6 +44,22 @@ main > section.ticker,
 @keyframes pgpkTickerMove {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+.social-links a {
+  font-size: 0 !important;
+}
+
+.social-links svg,
+.social-links img {
+  width: 21px !important;
+  height: 21px !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+.social-links svg {
+  fill: currentColor !important;
 }
 
 @media (max-width: 820px) {
