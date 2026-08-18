@@ -111,4 +111,59 @@ function applyOfficialWhatsappLogo(){
     }
   });
 }
+
+function removeRetiredMobileService(){
+  document.querySelectorAll('a[href*="/mobile-app-development/"]').forEach(link=>{
+    const card=link.closest('.service-card');
+    if(card){ card.remove(); return; }
+    link.remove();
+  });
+
+  document.querySelectorAll('.ticker span').forEach(span=>{
+    if((span.textContent||'').trim().toLowerCase()==='mobile apps'){
+      const previous=span.previousElementSibling;
+      const next=span.nextElementSibling;
+      span.remove();
+      if(previous?.tagName==='I') previous.remove();
+      if(next?.tagName==='I') next.remove();
+    }
+  });
+
+  const heroLead=document.querySelector('.hero-lead');
+  if(heroLead && /mobile apps/i.test(heroLead.textContent||'')){
+    heroLead.textContent='Prime Growth PK combines websites, SEO, AI automation, advertising and creative support into one practical growth partnership.';
+  }
+
+  const path=window.location.pathname;
+  if(path==='/' || path==='/services/'){
+    document.querySelectorAll('meta[name="description"],meta[property="og:description"]').forEach(meta=>{
+      let value=meta.getAttribute('content')||'';
+      value=value.replace(/mobile app development/gi,'custom software development').replace(/mobile apps/gi,'custom software').replace(/mobile product/gi,'custom software initiatives');
+      meta.setAttribute('content',value);
+    });
+
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(script=>{
+      try{
+        const data=JSON.parse(script.textContent||'{}');
+        const graph=Array.isArray(data['@graph'])?data['@graph']:[data];
+        graph.forEach(item=>{
+          if(typeof item.description==='string'){
+            item.description=item.description.replace(/mobile app development/gi,'custom software development').replace(/mobile apps/gi,'custom software');
+          }
+          const elements=item?.mainEntity?.itemListElement;
+          if(Array.isArray(elements)){
+            item.mainEntity.itemListElement=elements.filter(entry=>!String(entry?.itemOffered?.name||'').toLowerCase().includes('mobile app development'));
+          }
+        });
+        script.textContent=JSON.stringify(data);
+      }catch(e){/* keep existing structured data if parsing fails */}
+    });
+  }
+}
+
 applyOfficialWhatsappLogo();
+removeRetiredMobileService();
+
+document.querySelectorAll('img').forEach(img=>{
+  if(!img.closest('.hero-section') && !img.closest('.hero')) img.loading='lazy';
+});
