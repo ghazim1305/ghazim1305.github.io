@@ -1,0 +1,92 @@
+name: Site audit cleanup
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply production SEO/content cleanup
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          root = Path('.')
+          changed = []
+
+          # Keep the retired mobile-app URL as a redirect, but remove the
+          # retired service from live HTML, metadata and structured data.
+          for path in root.rglob('*.html'):
+              if '.git' in path.parts or path.as_posix() == 'mobile-app-development/index.html':
+                  continue
+              text = path.read_text(encoding='utf-8')
+              original = text
+
+              # Remove complete service cards whose visible content is Mobile App Development.
+              patterns = [
+                  r'<div class="card service-card[^>]*>\s*.*?<h3>Mobile App Development</h3>.*?</div>\s*(?=<div class="card service-card|</div>\s*</div>)',
+                  r'<article[^>]*>\s*.*?<h[23]>Mobile App Development</h[23]>.*?</article>',
+              ]
+              for pattern in patterns:
+                  text = re.sub(pattern, '', text, flags=re.I | re.S)
+
+              replacements = {
+                  'website development, AI automation, mobile apps, SEO, advertising, social media, branding, content and custom software services':
+                      'website development, AI automation, SEO, advertising, social media, branding, content and custom software services',
+                  'website development, AI automation, mobile app development, SEO, paid advertising, social media marketing, branding, content, email marketing and custom business software':
+                      'website development, AI automation, SEO, paid advertising, social media marketing, branding, content, email marketing and custom business software',
+                  'Choose focused support for your website, AI initiatives, mobile product, search visibility, advertising, brand, content or internal business processes.':
+                      'Choose focused support for your website, AI initiatives, search visibility, advertising, brand, content or internal business processes.',
+                  'From public websites to internal portals and AI assistants, each project begins with a clear user need and a practical delivery scope.':
+                      'From public websites to internal portals, AI assistants and business systems, each project begins with a clear user need and a practical delivery scope.',
+                  'AI, mobile apps and custom software':
+                      'AI and custom software',
+                  'mobile apps, SEO':
+                      'SEO',
+                  'mobile product':
+                      'digital product',
+              }
+              for old, new in replacements.items():
+                  text = text.replace(old, new)
+
+              # Remove mobile-app Service entries from JSON-LD OfferCatalogs.
+              text = re.sub(
+                  r'\s*,?\s*\{"@type":"Offer","itemOffered":\{"@type":"Service","name":"Mobile App Development","url":"https://primegrowthpk\.com/mobile-app-development/"\}\}',
+                  '', text, flags=re.I
+              )
+              text = re.sub(
+                  r'\s*,?\s*\{"@type":\s*"Offer",\s*"itemOffered":\s*\{"@type":\s*"Service",\s*"name":\s*"Mobile App Development".*?\}\}',
+                  '', text, flags=re.I
+              )
+
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+                  changed.append(path.as_posix())
+
+          if changed:
+              print('Updated files:')
+              print('\n'.join(changed))
+          else:
+              print('No further cleanup required.')
+
+      - name: Commit cleanup changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: complete website audit cleanup"
+          git push
