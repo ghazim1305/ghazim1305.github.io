@@ -1,0 +1,88 @@
+name: Site quality checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate site files
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          import sys
+
+          root = Path('.')
+          html_files = [p for p in root.rglob('*.html') if '.git' not in p.parts]
+          sitemap = root / 'sitemap.xml'
+          errors = []
+          warnings = []
+
+          # Validate every sitemap URL maps to a local HTML page.
+          if sitemap.exists():
+              text = sitemap.read_text(encoding='utf-8')
+              urls = re.findall(r'<loc>https://primegrowthpk\.com(/[^<]*)</loc>', text)
+              for url_path in urls:
+                  rel = url_path.strip('/').split('?')[0]
+                  candidate = root / ('index.html' if not rel else rel / 'index.html')
+                  if not candidate.exists():
+                      errors.append(f'Sitemap URL has no local page: {url_path}')
+
+          for path in html_files:
+              text = path.read_text(encoding='utf-8', errors='replace')
+              lower = text.lower()
+
+              # Retired service should not appear in active pages.
+              if path.as_posix() != 'mobile-app-development/index.html' and 'mobile app development' in lower:
+                  errors.append(f'Retired Mobile App Development reference remains in: {path}')
+
+              title = re.search(r'<title[^>]*>(.*?)</title>', text, re.I | re.S)
+              if not title or not re.sub(r'\s+', ' ', title.group(1)).strip():
+                  errors.append(f'Missing title: {path}')
+
+              description = re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']*)', text, re.I)
+              if not description:
+                  warnings.append(f'Missing meta description: {path}')
+              else:
+                  length = len(description.group(1).strip())
+                  if length < 70 or length > 170:
+                      warnings.append(f'Meta description length {length}: {path}')
+
+              canonical = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)', text, re.I)
+              if not canonical:
+                  warnings.append(f'Missing canonical: {path}')
+
+              h1_count = len(re.findall(r'<h1\b', text, re.I))
+              if h1_count == 0:
+                  warnings.append(f'Missing H1: {path}')
+              elif h1_count > 1:
+                  warnings.append(f'Multiple H1 elements ({h1_count}): {path}')
+
+              # Flag obvious placeholder/development content.
+              for token in ('lorem ipsum', 'TODO', 'FIXME', 'debugger;'):
+                  if token.lower() in lower:
+                      warnings.append(f'Potential development/placeholder text "{token}" in: {path}')
+
+          if errors:
+              print('ERRORS:')
+              print('\n'.join(f'- {x}' for x in errors))
+          if warnings:
+              print('WARNINGS:')
+              print('\n'.join(f'- {x}' for x in warnings))
+
+          if errors:
+              sys.exit(1)
+
+          print(f'Quality checks passed for {len(html_files)} HTML pages.')
+          print(f'Warnings: {len(warnings)}')
