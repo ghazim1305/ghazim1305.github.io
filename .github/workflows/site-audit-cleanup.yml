@@ -25,6 +25,7 @@ jobs:
           retired = 'mobile-app-development/index.html'
 
           seo = {
+              'services/index.html': ('Digital Growth, Web Development & Automation Services | Prime Growth PK', 'Build, grow and automate your business with website development, SEO, AI automation, paid advertising, social media, branding, content, email marketing and business software.'),
               'web-development/index.html': ('Website Development Services | Prime Growth PK', 'Build fast, responsive and conversion-focused business websites with Prime Growth PK. Modern web development designed for credibility, usability and growth.'),
               'ai-automation/index.html': ('AI Automation Services for Businesses | Prime Growth PK', 'Automate repetitive work with practical AI chatbots, document assistants, lead workflows and business automation built around your operations.'),
               'seo/index.html': ('SEO Services for Sustainable Organic Growth | Prime Growth PK', 'Improve search visibility with technical SEO, on-page optimisation, content strategy, local SEO and measurable organic growth.'),
@@ -58,13 +59,17 @@ jobs:
               'clients in Pakistan': 'clients worldwide',
               'clients across Pakistan': 'clients worldwide',
               'Pakistan-based businesses': 'businesses worldwide',
+              'organisations in businesses worldwide': 'organisations worldwide',
+              'companies in businesses worldwide': 'companies worldwide',
           }
 
           positioning = {
               'Digital growth studio for Pakistan + UK': 'Digital growth studio for businesses worldwide',
               'Prime Growth PK combines websites, SEO, AI automation, advertising and creative support into one practical growth partnership.': 'Prime Growth PK brings strategy, websites, SEO, AI automation and digital marketing together to help businesses build, grow and automate with one practical partner.',
               'Digital & Technology Services Pakistan & UK | Prime Growth PK': 'Digital Growth, Web Development & Automation Services | Prime Growth PK',
+              'Digital &amp; Technology Services Pakistan &amp; UK | Prime Growth PK': 'Digital Growth, Web Development &amp; Automation Services | Prime Growth PK',
               'Digital Growth & Technology Services': 'Digital Growth, Web Development & Automation Services',
+              'Digital Growth &amp; Technology Services': 'Digital Growth, Web Development &amp; Automation Services',
               'Choose focused support for your website, AI initiatives, search visibility, advertising, brand, content or internal business processes.': 'Build a stronger digital presence, reach the right customers and automate the work that slows your business down.',
               'Build better digital products and business systems': 'Build the digital systems your business needs to grow',
               'Reach the right audience and improve conversion': 'Turn digital attention into business growth',
@@ -99,12 +104,23 @@ jobs:
               text = re.sub(r'(?i)\bmobile app development\b\s*[•|,/&-]?\s*', '', text)
               text = re.sub(r'(?i)\bmobile apps\b\s*[•|,/&-]?\s*', '', text)
 
+              # Replace structured-data country targeting with a single global service area.
+              text = re.sub(r'"areaServed"\s*:\s*\[\s*\{"@type"\s*:\s*"Country"\s*,\s*"name"\s*:\s*"Pakistan"\s*\}\s*,\s*\{"@type"\s*:\s*"Country"\s*,\s*"name"\s*:\s*"United Kingdom"\s*\}\s*\]', '"areaServed":"Worldwide"', text, flags=re.I)
+
+              # Clean common malformed results from previous passes.
+              text = text.replace('organisations in businesses worldwide', 'organisations worldwide')
+              text = text.replace('companies in businesses worldwide', 'companies worldwide')
+
               key = path.as_posix()
               if key in seo:
                   title, description = seo[key]
                   text = re.sub(r'<title>.*?</title>', f'<title>{title}</title>', text, count=1, flags=re.I | re.S)
                   if re.search(r'<meta[^>]+name=["\']description["\'][^>]*>', text, flags=re.I):
                       text = re.sub(r'<meta[^>]+name=["\']description["\'][^>]*>', f'<meta name="description" content="{description}">', text, count=1, flags=re.I | re.S)
+                  if re.search(r'<meta[^>]+property=["\']og:title["\'][^>]*>', text, flags=re.I):
+                      text = re.sub(r'<meta[^>]+property=["\']og:title["\'][^>]*>', f'<meta property="og:title" content="{title}">', text, count=1, flags=re.I | re.S)
+                  if re.search(r'<meta[^>]+property=["\']og:description["\'][^>]*>', text, flags=re.I):
+                      text = re.sub(r'<meta[^>]+property=["\']og:description["\'][^>]*>', f'<meta property="og:description" content="{description}">', text, count=1, flags=re.I | re.S)
 
               if key == 'index.html':
                   text = text.replace('Prime Growth PK helps businesses grow through web development, SEO, AI automation, digital marketing and custom software in Pakistan, the UK and worldwide.', 'Prime Growth PK helps businesses grow through web development, SEO, AI automation, digital marketing and custom software for clients worldwide.')
@@ -122,23 +138,26 @@ jobs:
           else:
               print('No further cleanup required.')
 
-      - name: Validate no retired service remains
+      - name: Validate production positioning
         shell: python
         run: |
           from pathlib import Path
           import sys
           errors = []
+          blocked = ('mobile app development', 'mobile apps', 'Pakistan', 'United Kingdom')
           for path in Path('.').rglob('*.html'):
               if '.git' in path.parts or path.as_posix() == 'mobile-app-development/index.html':
                   continue
-              text = path.read_text(encoding='utf-8', errors='replace').lower()
-              if 'mobile app development' in text or 'mobile apps' in text:
-                  errors.append(path.as_posix())
+              text = path.read_text(encoding='utf-8', errors='replace')
+              lower = text.lower()
+              if 'mobile app development' in lower or 'mobile apps' in lower:
+                  errors.append(f'Retired mobile service remains: {path}')
+              if 'pakistan' in lower or 'united kingdom' in lower:
+                  errors.append(f'Specific country positioning remains: {path}')
           if errors:
-              print('Retired service references remain:')
               print('\n'.join(errors))
               sys.exit(1)
-          print('Retired service is absent from active HTML.')
+          print('Global positioning and retired-service checks passed.')
 
       - name: Commit cleanup changes
         shell: bash
@@ -150,5 +169,5 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "chore: refine global positioning and SEO"
+          git commit -m "chore: finalize global positioning and SEO"
           git push
