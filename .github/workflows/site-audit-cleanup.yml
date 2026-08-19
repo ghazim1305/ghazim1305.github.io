@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Apply production SEO/content cleanup
+      - name: Apply production positioning and SEO cleanup
         shell: python
         run: |
           from pathlib import Path
@@ -22,61 +22,123 @@ jobs:
 
           root = Path('.')
           changed = []
+          retired = 'mobile-app-development/index.html'
 
-          # Keep the retired mobile-app URL as a redirect, but remove the
-          # retired service from live HTML, metadata and structured data.
+          seo = {
+              'web-development/index.html': ('Website Development Services | Prime Growth PK', 'Build fast, responsive and conversion-focused business websites with Prime Growth PK. Modern web development designed for credibility, usability and growth.'),
+              'ai-automation/index.html': ('AI Automation Services for Businesses | Prime Growth PK', 'Automate repetitive work with practical AI chatbots, document assistants, lead workflows and business automation built around your operations.'),
+              'seo/index.html': ('SEO Services for Sustainable Organic Growth | Prime Growth PK', 'Improve search visibility with technical SEO, on-page optimisation, content strategy, local SEO and measurable organic growth.'),
+              'google-ads/index.html': ('Google Ads & PPC Management Services | Prime Growth PK', 'Reach high-intent customers with Google Ads and PPC campaigns built around keyword strategy, conversion tracking and continuous optimisation.'),
+              'social-media-marketing/index.html': ('Social Media Marketing Services | Prime Growth PK', 'Build a consistent social presence with content planning, creative production, audience strategy and paid social support.'),
+              'custom-software/index.html': ('Custom Software & Business Automation | Prime Growth PK', 'Build portals, dashboards, reporting tools and business automation systems tailored to your workflows and operational goals.'),
+              'branding/index.html': ('Branding & Design Services | Prime Growth PK', 'Create a clear, professional brand identity with logo design, visual systems and marketing assets built for consistent communication.'),
+              'content-writing/index.html': ('Content Writing & SEO Content Services | Prime Growth PK', 'Get clear, useful and search-friendly website copy, articles, business content and marketing copy aligned with your audience and goals.'),
+              'email-marketing/index.html': ('Email Marketing Services | Prime Growth PK', 'Plan and improve email campaigns, newsletters, automation and customer communication designed to support engagement and conversions.'),
+              'website-maintenance/index.html': ('Website Maintenance & Technical Support | Prime Growth PK', 'Keep your website secure, current and reliable with content updates, technical fixes, performance checks and ongoing website support.'),
+          }
+
+          replacements = {
+              'Pakistan • United Kingdom • International': 'Worldwide',
+              'Pakistan + UK targeting': 'Worldwide targeting',
+              'Key markets: Pakistan + UK': 'Worldwide reach',
+              'Pakistan + UK': 'Worldwide',
+              'Pakistan and the UK': 'businesses worldwide',
+              'Pakistan, the UK and worldwide': 'businesses worldwide',
+              'Pakistan, the United Kingdom and international markets': 'businesses worldwide',
+              'Pakistan, the United Kingdom and international': 'businesses worldwide',
+              'Pakistan, the United Kingdom': 'businesses worldwide',
+              'Pakistan or the UK': 'any market',
+              'Pakistan/UK': 'worldwide',
+              'Pakistan & UK': 'Worldwide',
+              'Pakistan + United Kingdom': 'Worldwide',
+              'Pakistan, UK': 'worldwide',
+              'for organisations in Pakistan': 'for organisations worldwide',
+              'for businesses in Pakistan': 'for businesses worldwide',
+              'businesses in Pakistan': 'businesses worldwide',
+              'clients in Pakistan': 'clients worldwide',
+              'clients across Pakistan': 'clients worldwide',
+              'Pakistan-based businesses': 'businesses worldwide',
+          }
+
+          positioning = {
+              'Digital growth studio for Pakistan + UK': 'Digital growth studio for businesses worldwide',
+              'Prime Growth PK combines websites, SEO, AI automation, advertising and creative support into one practical growth partnership.': 'Prime Growth PK brings strategy, websites, SEO, AI automation and digital marketing together to help businesses build, grow and automate with one practical partner.',
+              'Digital & Technology Services Pakistan & UK | Prime Growth PK': 'Digital Growth, Web Development & Automation Services | Prime Growth PK',
+              'Digital Growth & Technology Services': 'Digital Growth, Web Development & Automation Services',
+              'Choose focused support for your website, AI initiatives, search visibility, advertising, brand, content or internal business processes.': 'Build a stronger digital presence, reach the right customers and automate the work that slows your business down.',
+              'Build better digital products and business systems': 'Build the digital systems your business needs to grow',
+              'Reach the right audience and improve conversion': 'Turn digital attention into business growth',
+              'One connected partner': 'One connected growth partner',
+              'Strategy, Design, Technology, Growth': 'Strategy, Technology, Automation, Growth',
+              'Professional enough for your clients. Practical enough for your team.': 'Professional digital delivery. Practical business outcomes.',
+          }
+
           for path in root.rglob('*.html'):
-              if '.git' in path.parts or path.as_posix() == 'mobile-app-development/index.html':
+              if '.git' in path.parts or path.as_posix() == retired:
                   continue
-              text = path.read_text(encoding='utf-8')
+              text = path.read_text(encoding='utf-8', errors='replace')
               original = text
 
-              # Remove complete service cards whose visible content is Mobile App Development.
               patterns = [
                   r'<div class="card service-card[^>]*>\s*.*?<h3>Mobile App Development</h3>.*?</div>\s*(?=<div class="card service-card|</div>\s*</div>)',
                   r'<article[^>]*>\s*.*?<h[23]>Mobile App Development</h[23]>.*?</article>',
+                  r'<li[^>]*>\s*.*?Mobile App Development.*?</li>',
+                  r'<a[^>]*href=["\']/mobile-app-development/["\'][^>]*>.*?</a>',
               ]
               for pattern in patterns:
                   text = re.sub(pattern, '', text, flags=re.I | re.S)
 
-              replacements = {
-                  'website development, AI automation, mobile apps, SEO, advertising, social media, branding, content and custom software services':
-                      'website development, AI automation, SEO, advertising, social media, branding, content and custom software services',
-                  'website development, AI automation, mobile app development, SEO, paid advertising, social media marketing, branding, content, email marketing and custom business software':
-                      'website development, AI automation, SEO, paid advertising, social media marketing, branding, content, email marketing and custom business software',
-                  'Choose focused support for your website, AI initiatives, mobile product, search visibility, advertising, brand, content or internal business processes.':
-                      'Choose focused support for your website, AI initiatives, search visibility, advertising, brand, content or internal business processes.',
-                  'From public websites to internal portals and AI assistants, each project begins with a clear user need and a practical delivery scope.':
-                      'From public websites to internal portals, AI assistants and business systems, each project begins with a clear user need and a practical delivery scope.',
-                  'AI, mobile apps and custom software':
-                      'AI and custom software',
-                  'mobile apps, SEO':
-                      'SEO',
-                  'mobile product':
-                      'digital product',
-              }
+              text = re.sub(r'\s*,?\s*\{"@type"\s*:\s*"Offer"\s*,\s*"itemOffered"\s*:\s*\{"@type"\s*:\s*"Service"\s*,\s*"name"\s*:\s*"Mobile App Development".*?\}\}', '', text, flags=re.I | re.S)
+              text = re.sub(r'\s*,?\s*\{"@type"\s*:\s*"Service"\s*,\s*"name"\s*:\s*"Mobile App Development".*?\}', '', text, flags=re.I | re.S)
+
               for old, new in replacements.items():
                   text = text.replace(old, new)
+              for old, new in positioning.items():
+                  text = text.replace(old, new)
 
-              # Remove mobile-app Service entries from JSON-LD OfferCatalogs.
-              text = re.sub(
-                  r'\s*,?\s*\{"@type":"Offer","itemOffered":\{"@type":"Service","name":"Mobile App Development","url":"https://primegrowthpk\.com/mobile-app-development/"\}\}',
-                  '', text, flags=re.I
-              )
-              text = re.sub(
-                  r'\s*,?\s*\{"@type":\s*"Offer",\s*"itemOffered":\s*\{"@type":\s*"Service",\s*"name":\s*"Mobile App Development".*?\}\}',
-                  '', text, flags=re.I
-              )
+              text = re.sub(r'(?i)\bmobile app development\b\s*[•|,/&-]?\s*', '', text)
+              text = re.sub(r'(?i)\bmobile apps\b\s*[•|,/&-]?\s*', '', text)
+
+              key = path.as_posix()
+              if key in seo:
+                  title, description = seo[key]
+                  text = re.sub(r'<title>.*?</title>', f'<title>{title}</title>', text, count=1, flags=re.I | re.S)
+                  if re.search(r'<meta[^>]+name=["\']description["\'][^>]*>', text, flags=re.I):
+                      text = re.sub(r'<meta[^>]+name=["\']description["\'][^>]*>', f'<meta name="description" content="{description}">', text, count=1, flags=re.I | re.S)
+
+              if key == 'index.html':
+                  text = text.replace('Prime Growth PK helps businesses grow through web development, SEO, AI automation, digital marketing and custom software in Pakistan, the UK and worldwide.', 'Prime Growth PK helps businesses grow through web development, SEO, AI automation, digital marketing and custom software for clients worldwide.')
+                  text = text.replace('Digital growth studio for Pakistan + UK', 'Digital growth studio for businesses worldwide')
+                  text = text.replace('Pakistan + UK targeting', 'Worldwide targeting')
+                  text = text.replace('Key markets: Pakistan + UK', 'Worldwide reach')
 
               if text != original:
                   path.write_text(text, encoding='utf-8')
-                  changed.append(path.as_posix())
+                  changed.append(key)
 
           if changed:
               print('Updated files:')
-              print('\n'.join(changed))
+              print('\n'.join(sorted(set(changed))))
           else:
               print('No further cleanup required.')
+
+      - name: Validate no retired service remains
+        shell: python
+        run: |
+          from pathlib import Path
+          import sys
+          errors = []
+          for path in Path('.').rglob('*.html'):
+              if '.git' in path.parts or path.as_posix() == 'mobile-app-development/index.html':
+                  continue
+              text = path.read_text(encoding='utf-8', errors='replace').lower()
+              if 'mobile app development' in text or 'mobile apps' in text:
+                  errors.append(path.as_posix())
+          if errors:
+              print('Retired service references remain:')
+              print('\n'.join(errors))
+              sys.exit(1)
+          print('Retired service is absent from active HTML.')
 
       - name: Commit cleanup changes
         shell: bash
@@ -88,5 +150,5 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "chore: complete website audit cleanup"
+          git commit -m "chore: refine global positioning and SEO"
           git push
